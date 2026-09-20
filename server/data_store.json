@@ -1,0 +1,133 @@
+{
+  "goals": [
+    {
+      "_id": "goal_1789451145579",
+      "title": "Build the successful version2 of BillAI",
+      "description": "Implementing:\n-Proper team roles,\n-Fix emailing,\n-Testing actually in a software,\n-Adding more models to AIs\n-Implementing proper databases in PostgreSQL and,\n-Add more providers like Claude, Gemini and OpenAI\n-Add routing to models as per difficulty of prompts",
+      "category": "Career & Tech",
+      "targetDate": "2026-09-30",
+      "status": "Not Started",
+      "overallProgress": 0,
+      "createdAt": "2026-09-15T05:45:45.579Z",
+      "subgoals": []
+    }
+  ],
+  "subgoals": [
+    {
+      "_id": "sub_1789451176189",
+      "goalId": "goal_1789451145579",
+      "title": "Recheck and Retest version 1 of Bill AI",
+      "month": "2026-09",
+      "assignedDate": "2026-09-16",
+      "targetDate": "",
+      "status": "Not Started",
+      "progress": 0,
+      "weight": 1,
+      "tasks": []
+    },
+    {
+      "_id": "sub_1789451214592",
+      "goalId": "goal_1789451145579",
+      "title": "Fix assigning team roles like team lead and team members",
+      "month": "2026-09",
+      "assignedDate": "2026-09-17",
+      "targetDate": "",
+      "status": "Not Started",
+      "progress": 0,
+      "weight": 1,
+      "tasks": []
+    },
+    {
+      "_id": "sub_1789451246367",
+      "goalId": "goal_1789451145579",
+      "title": "Fix email feature so that everyone receives the email",
+      "month": "2026-09",
+      "assignedDate": "2026-09-18",
+      "targetDate": "",
+      "status": "Not Started",
+      "progress": 0,
+      "weight": 1,
+      "tasks": []
+    },
+    {
+      "_id": "sub_1789451278851",
+      "goalId": "goal_1789451145579",
+      "title": "Test the models by using VS Code as a company's software",
+      "month": "2026-09",
+      "assignedDate": "2026-09-19",
+      "targetDate": "",
+      "status": "Not Started",
+      "progress": 0,
+      "weight": 1,
+      "tasks": []
+    },
+    {
+      "_id": "sub_1789451308779",
+      "goalId": "goal_1789451145579",
+      "title": "Add more models of Groq",
+      "month": "2026-09",
+      "assignedDate": "2026-09-20",
+      "targetDate": "",
+      "status": "Not Started",
+      "progress": 0,
+      "weight": 1,
+      "tasks": []
+    },
+    {
+      "_id": "sub_1789451334922",
+      "goalId": "goal_1789451145579",
+      "title": "Implement proper Databases of PostgresSQL",
+      "month": "2026-09",
+      "assignedDate": "2026-09-21",
+      "targetDate": "",
+      "status": "Not Started",
+      "progress": 0,
+      "weight": 1,
+      "tasks": []
+    },
+    {
+      "_id": "sub_1789451365487",
+      "goalId": "goal_1789451145579",
+      "title": "Adding more AI providers such as OpenAI, Gemini, Claude",
+      "month": "2026-09",
+      "assignedDate": "2026-09-22",
+      "targetDate": "",
+      "status": "Not Started",
+      "progress": 0,
+      "weight": 1,
+      "tasks": []
+    },
+    {
+      "_id": "sub_1789451414709",
+      "goalId": "goal_1789451145579",
+      "title": "🌟Adding routing to the models as per the difficulty of prompts",
+      "month": "2026-09",
+      "assignedDate": "2026-09-22",
+      "targetDate": "",
+      "status": "Not Started",
+      "progress": 0,
+      "weight": 1,
+      "tasks": []
+    }
+  ],
+  "tasks": [],
+  "activities": [
+    {
+      "date": "2026-09-10",
+      "count": 2
+    },
+    {
+      "date": "2026-09-12",
+      "count": 4
+    },
+    {
+      "date": "2026-09-14",
+      "count": 16
+    },
+    {
+      "date": "2026-09-15",
+      "count": 10,
+      "goalId": "goal_1"
+    }
+  ]
+}
