@@ -8,8 +8,11 @@ import ChronosLogo from './components/ChronosLogo';
 import confetti from 'canvas-confetti';
 import { Target, Compass } from 'lucide-react';
 
-const rawApiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
-const API_BASE = rawApiBase.replace(/\/+$/, '');
+let rawApiBase = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api').trim().replace(/\/+$/, '');
+if (!rawApiBase.endsWith('/api')) {
+  rawApiBase += '/api';
+}
+const API_BASE = rawApiBase;
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('goals');
