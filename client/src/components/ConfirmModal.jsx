@@ -5,20 +5,7 @@ export default function ConfirmModal({ isOpen, title, message, onConfirm, onCanc
   if (!isOpen) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'rgba(5, 7, 10, 0.85)',
-      backdropFilter: 'blur(8px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 2000,
-      padding: '1rem'
-    }}>
+    <div className="modal-overlay">
       <div className="art-deco-card" style={{ maxWidth: '450px', width: '100%', padding: '1.75rem', border: '1px solid #e74c3c' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid rgba(231, 76, 60, 0.3)', paddingBottom: '0.6rem' }}>
           <h3 style={{ color: '#e74c3c', fontFamily: 'var(--font-heading)', fontSize: '1.1rem', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
