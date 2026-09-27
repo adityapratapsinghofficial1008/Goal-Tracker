@@ -18,18 +18,41 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('goals');
   const [goals, setGoals] = useState([]);
   const [analytics, setAnalytics] = useState(null);
+  const [storageType, setStorageType] = useState('LocalStorage');
+  const [mongoUri, setMongoUri] = useState(() => localStorage.getItem('chronos_mongo_uri') || '');
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Get Custom Headers (attaches x-mongo-uri if present)
+  const getHeaders = (extraHeaders = {}) => {
+    const headers = { ...extraHeaders };
+    if (mongoUri) {
+      headers['x-mongo-uri'] = mongoUri;
+    }
+    return headers;
+  };
+
+  const handleSaveMongoUri = (newUri) => {
+    setMongoUri(newUri);
+    if (newUri) {
+      localStorage.setItem('chronos_mongo_uri', newUri);
+    } else {
+      localStorage.removeItem('chronos_mongo_uri');
+    }
+  };
 
   // Fetch Goals & Analytics
   const fetchAllData = async () => {
     try {
-      const res = await fetch(`${API_BASE}/goals`);
+      const res = await fetch(`${API_BASE}/goals`, { headers: getHeaders() });
       const data = await res.json();
+      if (data.db) {
+        setStorageType(data.db);
+      }
       if (data.goals) {
         setGoals(data.goals);
       }
 
-      const analyticsRes = await fetch(`${API_BASE}/analytics`);
+      const analyticsRes = await fetch(`${API_BASE}/analytics`, { headers: getHeaders() });
       const analyticsData = await analyticsRes.json();
       setAnalytics(analyticsData);
     } catch (err) {
@@ -39,14 +62,14 @@ export default function App() {
 
   useEffect(() => {
     fetchAllData();
-  }, []);
+  }, [mongoUri]);
 
   // Create Goal
   const handleCreateGoal = async (goalData) => {
     try {
       const res = await fetch(`${API_BASE}/goals`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(goalData)
       });
       if (res.ok) {
@@ -60,7 +83,7 @@ export default function App() {
   // Delete Goal
   const handleDeleteGoal = async (id) => {
     try {
-      await fetch(`${API_BASE}/goals/${id}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/goals/${id}`, { method: 'DELETE', headers: getHeaders() });
       fetchAllData();
     } catch (e) {
       console.error('Delete Goal error:', e);
@@ -72,7 +95,7 @@ export default function App() {
     try {
       const res = await fetch(`${API_BASE}/goals/${goalId}/subgoals`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(subGoalData)
       });
       if (res.ok) fetchAllData();
@@ -84,7 +107,7 @@ export default function App() {
   // Delete SubGoal
   const handleDeleteSubGoal = async (subGoalId) => {
     try {
-      await fetch(`${API_BASE}/subgoals/${subGoalId}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/subgoals/${subGoalId}`, { method: 'DELETE', headers: getHeaders() });
       fetchAllData();
     } catch (e) {
       console.error('Delete SubGoal error:', e);
@@ -96,7 +119,7 @@ export default function App() {
     try {
       const res = await fetch(`${API_BASE}/subgoals/${subGoalId}/tasks`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: getHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify(taskData)
       });
       if (res.ok) fetchAllData();
@@ -108,7 +131,7 @@ export default function App() {
   // Toggle Task Status (Done / In Progress)
   const handleToggleTask = async (taskId) => {
     try {
-      const res = await fetch(`${API_BASE}/tasks/${taskId}/toggle`, { method: 'PATCH' });
+      const res = await fetch(`${API_BASE}/tasks/${taskId}/toggle`, { method: 'PATCH', headers: getHeaders() });
       if (res.ok) {
         // Trigger celebratory confetti on completion
         confetti({
@@ -127,7 +150,7 @@ export default function App() {
   // Delete Task
   const handleDeleteTask = async (taskId) => {
     try {
-      await fetch(`${API_BASE}/tasks/${taskId}`, { method: 'DELETE' });
+      await fetch(`${API_BASE}/tasks/${taskId}`, { method: 'DELETE', headers: getHeaders() });
       fetchAllData();
     } catch (e) {
       console.error('Delete Task error:', e);
@@ -140,6 +163,9 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenNewGoalModal={() => setIsModalOpen(true)}
+        storageType={storageType}
+        mongoUri={mongoUri}
+        onSaveMongoUri={handleSaveMongoUri}
       />
 
       <main style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', padding: '2rem 1.5rem', flex: 1 }}>
